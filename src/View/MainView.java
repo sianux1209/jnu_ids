@@ -49,6 +49,16 @@ public class MainView extends javax.swing.JFrame {
 	/**
 	 * Creates new form MainView
 	 */
+	
+	/**
+	 * @author 정찬우
+	 * @serial 2016.05.30
+	 * 패킷 내용 출력을 위한 Controller.MainController 변수 선언문 추가 
+	 * 시작버튼 이벤트 리스너에 컨트롤러를 조작하는 구문 추가
+	 */
+	
+	private Controller.MainController mainController = new Controller.MainController();
+	
 	public MainView() {
 
 		/* Set the Nimbus look and feel */
@@ -214,12 +224,18 @@ public class MainView extends javax.swing.JFrame {
 
 				if (check_start_stop) {
 					check_start_stop = false;
+					
+					mainController.main(false);
+					
 					label_start_stop.setIcon(new javax.swing.ImageIcon(Resource.ImageResource.mainView_start)); // NOI18N
 					tabbedPane_main.setSelectedIndex(0);
 					JOptionPane.showMessageDialog(null, "종료", "Title", JOptionPane.INFORMATION_MESSAGE, null);
 
 				} else {
 					check_start_stop = true;
+					
+					mainController.main(true);
+					
 					label_start_stop.setIcon(new javax.swing.ImageIcon(Resource.ImageResource.mainView_stop)); // NOI18N
 					tabbedPane_main.setSelectedIndex(0);
 					JOptionPane.showMessageDialog(null, "시작", "Title", JOptionPane.INFORMATION_MESSAGE, null);

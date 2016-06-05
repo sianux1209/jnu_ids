@@ -8,31 +8,64 @@
 
 package Controller;
 
-public class MainController {
-	private boolean condition;
+/**
+ * @author 정찬우
+ * @version 1.0
+ * @serial 2016.05.30
+ */
 
+public class MainController {
+	
+	/**
+	 * @ MainController
+	 * @ added main method 
+	 */
+	
+	private boolean condition;
+	
+	private PacketCaptureThread main_packetcaptureThread = new PacketCaptureThread();
 	
 	
-	//패킷 캡쳐 시작
+	/**
+	 * @author 정찬우
+	 * @since 2016.05.30
+	 * @param contdition	시작과 정지를 컨트롤할 플래그
+	 */
+	public void main(boolean contdition){
+		if(contdition)
+			startCapture();
+		else
+			stopCapture();
+	}
+
+	/**
+	 * Start Packet Capture
+	 * Set condition value is true
+	 * @return	Value Of String
+	 */
 	public String startCapture() {
 
 		condition = true;
 		
+		main_packetcaptureThread.start();
+		
 		String value = "";
-
 		return value;
-
 	}
 
 	
-	//패킷 캡쳐 멈춤
+	/**
+	 * Stop Packet Capture
+	 * Set condition value is false
+	 * @return	Value Of String
+	 */
 	public String stopCapture() {
 
 		condition = false;
 		
+		main_packetcaptureThread.stop();
+		
 		String value = "";
-
 		return value;
-
 	}
 }
