@@ -7,6 +7,7 @@ import java.net.NetworkInterface;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Vector;
+
 import Packet.Packet_Table;
 import jpcap.JpcapCaptor;
 import jpcap.packet.ARPPacket;
@@ -54,7 +55,7 @@ public class PacketCaptureThread extends Thread{
         
         System.out.println("-------------------------\n");
         //nChoice = Integer.parseInt(getInput("Choose interface (0,1..): "));
-        nChoice = 0;
+        nChoice = 1;
         // 장치 선택 후 입력 받음
         System.out.println("Listening on interface -> "+list[nChoice].description);
         System.out.println("-------------------------\n");
