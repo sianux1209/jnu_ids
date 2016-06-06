@@ -11,7 +11,14 @@ package Controller;
 
 import java.io.File;
 
+import View.MainView;
+
 public class AnalysesController extends MainController {
+	public AnalysesController(MainView mainView) {
+		super(mainView);
+		// TODO Auto-generated constructor stub
+	}
+
 	private String result;
 	
 	//ºÐ¼®

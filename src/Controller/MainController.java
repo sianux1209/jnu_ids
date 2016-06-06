@@ -8,6 +8,8 @@
 
 package Controller;
 
+import View.MainView;
+
 /**
  * @author Á¤Âù¿ì
  * @version 1.0
@@ -22,8 +24,16 @@ public class MainController {
 	 */
 	
 	private boolean condition;
+	MainView mainView;
 	
-	private PacketCaptureThread main_packetcaptureThread = new PacketCaptureThread();
+	
+	public PacketCaptureThread main_packetcaptureThread;
+	
+	public MainController(View.MainView mainView){
+		this.mainView = mainView; 
+		main_packetcaptureThread = new PacketCaptureThread(mainView);
+		
+	}
 	
 	
 	/**

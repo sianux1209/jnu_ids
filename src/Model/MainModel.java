@@ -12,7 +12,6 @@ package Model;
 //¸ÞÀÎ ¸ðµ¨
 public class MainModel {
 	private static View.MainView mainView;
-	private static Controller.MainController mainController;
 
 	
 	public static void main(String[] args){

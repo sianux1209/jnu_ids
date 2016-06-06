@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JLabel;
@@ -40,6 +41,8 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
+import Packet.Packet_Table;
+
 /**
  *
  * @author Sue
@@ -49,17 +52,17 @@ public class MainView extends javax.swing.JFrame {
 	/**
 	 * Creates new form MainView
 	 */
-	
+
 	/**
 	 * @author 정찬우
-	 * @serial 2016.05.30
-	 * 패킷 내용 출력을 위한 Controller.MainController 변수 선언문 추가 
-	 * 시작버튼 이벤트 리스너에 컨트롤러를 조작하는 구문 추가
+	 * @serial 2016.05.30 패킷 내용 출력을 위한 Controller.MainController 변수 선언문 추가 시작버튼
+	 *         이벤트 리스너에 컨트롤러를 조작하는 구문 추가
 	 */
-	
-	private Controller.MainController mainController = new Controller.MainController();
-	
+
+	private Controller.MainController mainController;
+
 	public MainView() {
+		mainController = new Controller.MainController(this);
 
 		/* Set the Nimbus look and feel */
 		// <editor-fold defaultstate="collapsed" desc=" Look and feel setting
@@ -113,7 +116,6 @@ public class MainView extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() throws IOException {
 
-		
 		panel_logo = new javax.swing.JPanel();
 		logo_lebel = new javax.swing.JLabel();
 		panel_tree = new javax.swing.JPanel();
@@ -224,20 +226,21 @@ public class MainView extends javax.swing.JFrame {
 
 				if (check_start_stop) {
 					check_start_stop = false;
-					
+
 					mainController.main(false);
-					
+
 					label_start_stop.setIcon(new javax.swing.ImageIcon(Resource.ImageResource.mainView_start)); // NOI18N
 					tabbedPane_main.setSelectedIndex(0);
 					JOptionPane.showMessageDialog(null, "종료", "Title", JOptionPane.INFORMATION_MESSAGE, null);
 
 				} else {
 					check_start_stop = true;
-					
+
 					mainController.main(true);
-					
+
 					label_start_stop.setIcon(new javax.swing.ImageIcon(Resource.ImageResource.mainView_stop)); // NOI18N
 					tabbedPane_main.setSelectedIndex(0);
+
 					JOptionPane.showMessageDialog(null, "시작", "Title", JOptionPane.INFORMATION_MESSAGE, null);
 
 				}
@@ -361,17 +364,15 @@ public class MainView extends javax.swing.JFrame {
 
 		JFreeChart chart_traffic = drawXYChart("TRAFFIC", createXYDataset());
 		ChartPanel cp_traffic = new ChartPanel(chart_traffic);
-		
+
 		javax.swing.GroupLayout panel_trafficLayout = new javax.swing.GroupLayout(panel_traffic);
-        panel_traffic.setLayout(panel_trafficLayout);
-        panel_trafficLayout.setHorizontalGroup(
-            panel_trafficLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cp_traffic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        panel_trafficLayout.setVerticalGroup(
-            panel_trafficLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cp_traffic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+		panel_traffic.setLayout(panel_trafficLayout);
+		panel_trafficLayout.setHorizontalGroup(panel_trafficLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(cp_traffic,
+						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		panel_trafficLayout.setVerticalGroup(panel_trafficLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(cp_traffic,
+						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
 		javax.swing.GroupLayout panel_graphLayout = new javax.swing.GroupLayout(panel_graph);
 		panel_graph.setLayout(panel_graphLayout);
@@ -392,18 +393,8 @@ public class MainView extends javax.swing.JFrame {
 
 		label_eventLog.setIcon(new javax.swing.ImageIcon(Resource.ImageResource.mainView_eventLog)); // NOI18N
 		table_eventLog.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-		table_eventLog.setModel(new javax.swing.table.DefaultTableModel(setTableObject(),
-				/*
-				 * new Object[][] { { null, null, null, null, null, null }, {
-				 * null, null, null, null, null, null }, { null, null, null,
-				 * null, null, null }, { null, null, null, null, null, null }, {
-				 * null, null, null, null, null, null }, { null, null, null,
-				 * null, null, null }, { null, null, null, null, null, null }, {
-				 * null, null, null, null, null, null }, { null, null, null,
-				 * null, null, null }, { null, null, null, null, null, null }, {
-				 * null, null, null, null, null, null }, { null, null, null,
-				 * null, null, null }, { null, null, null, null, null, null } },
-				 */
+
+		tableModel = new javax.swing.table.DefaultTableModel(null,
 				new String[] { "위험도", "시간", "프로토콜", "출발지", "도착지", "이벤트" }) {
 			Class[] types = new Class[] { java.lang.String.class, java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class, java.lang.String.class };
@@ -416,7 +407,9 @@ public class MainView extends javax.swing.JFrame {
 			public boolean isCellEditable(int rowIndex, int columnIndex) {
 				return canEdit[columnIndex];
 			}
-		});
+		};
+
+		table_eventLog.setModel(tableModel);
 
 		// jtable 중앙정렬
 		DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) table_eventLog.getTableHeader()
@@ -432,7 +425,7 @@ public class MainView extends javax.swing.JFrame {
 		if (table_eventLog.getColumnModel().getColumnCount() > 0) {
 			table_eventLog.getColumnModel().getColumn(0).setPreferredWidth(10);
 			table_eventLog.getColumnModel().getColumn(0).setCellRenderer(celAlignCenter);
-			table_eventLog.getColumnModel().getColumn(1).setPreferredWidth(10);
+			table_eventLog.getColumnModel().getColumn(1).setPreferredWidth(50);
 			table_eventLog.getColumnModel().getColumn(1).setCellRenderer(celAlignCenter);
 			table_eventLog.getColumnModel().getColumn(2).setPreferredWidth(10);
 			table_eventLog.getColumnModel().getColumn(2).setCellRenderer(celAlignCenter);
@@ -535,8 +528,8 @@ public class MainView extends javax.swing.JFrame {
 	}
 
 	public XYDataset createXYDataset() {
-		//TODO : create XYDataset 무슨 데이터를 받아야할지 모르겠음
-		
+		// TODO : create XYDataset 무슨 데이터를 받아야할지 모르겠음
+
 		Scanner scan = null;
 		TimeSeries series = new TimeSeries("TrafficData");
 		try {
@@ -573,10 +566,9 @@ public class MainView extends javax.swing.JFrame {
 		return chart;
 	}
 
-	public JFreeChart drawXYChart(String title,XYDataset dataset) {
-		//TODO : draw XYChart
-		JFreeChart chart = ChartFactory.createXYAreaChart(title, null, null, dataset, PlotOrientation.VERTICAL,
-				false, // legend
+	public JFreeChart drawXYChart(String title, XYDataset dataset) {
+		// TODO : draw XYChart
+		JFreeChart chart = ChartFactory.createXYAreaChart(title, null, null, dataset, PlotOrientation.VERTICAL, false, // legend
 				true, // tool tips
 				false // URLs
 		);
@@ -610,19 +602,11 @@ public class MainView extends javax.swing.JFrame {
 	private DefaultMutableTreeNode setMutableTreeNode() {
 		// TODO: set DefaultMutableTreeNode
 
-		Scanner scan = null;
-		try {
-			scan = new Scanner(new File("treeSample.txt"));
-		} catch (FileNotFoundException ee) {
-		}
+		rootNode = new DefaultMutableTreeNode("All");
 
-		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("IP");
-
-		while (scan.hasNext()) {
-			rootNode.add(new DefaultMutableTreeNode(scan.next()));
-		}
-
-		tree_ip.setModel(new DefaultTreeModel(rootNode));
+		//rootNode.add(new DefaultMutableTreeNode("All"));
+		treeModel = new DefaultTreeModel(rootNode);
+		tree_ip.setModel(treeModel);
 		scrollPane_iptree.setViewportView(tree_ip);
 
 		return rootNode;
@@ -639,17 +623,38 @@ public class MainView extends javax.swing.JFrame {
 	}
 
 	// TODO : setTableObject
-	public Object[][] setTableObject() {
+	public Object[][] setTableObject(ArrayList<Packet_Table> capturedPacket) {
 
-		Integer[][] objTest = new Integer[][] { { 1, 2, 3, 4, 5, 6 }, { 7, 8, 9, 10, 11, 12 }, { 1, 2, 3, 4, 5, 6 },
-				{ 7, 8, 9, 10, 11, 12 }, { 1, 2, 3, 4, 5, 6 }, { 7, 8, 9, 10, 11, 12 }, { 1, 2, 3, 4, 5, 6 },
-				{ 7, 8, 9, 10, 11, 12 }, { 1, 2, 3, 4, 5, 6 }, { 7, 8, 9, 10, 11, 12 }, { 7, 8, 9, 10, 11, 12 },
-				{ 7, 8, 9, 10, 11, 12 }, { 7, 8, 9, 10, 11, 12 }, { 7, 8, 9, 10, 11, 12 }, { 7, 8, 9, 10, 11, 12 },
-				{ 7, 8, 9, 10, 11, 12 }, { 7, 8, 9, 10, 11, 12 },
+		/*
+		 * Integer[][] objTest = new Integer[][] { { 1, 2, 3, 4, 5, 6 }, { 7, 8,
+		 * 9, 10, 11, 12 }, { 1, 2, 3, 4, 5, 6 }, { 7, 8, 9, 10, 11, 12 }, { 1,
+		 * 2, 3, 4, 5, 6 }, { 7, 8, 9, 10, 11, 12 }, { 1, 2, 3, 4, 5, 6 }, { 7,
+		 * 8, 9, 10, 11, 12 }, { 1, 2, 3, 4, 5, 6 }, { 7, 8, 9, 10, 11, 12 }, {
+		 * 7, 8, 9, 10, 11, 12 }, { 7, 8, 9, 10, 11, 12 }, { 7, 8, 9, 10, 11, 12
+		 * }, { 7, 8, 9, 10, 11, 12 }, { 7, 8, 9, 10, 11, 12 }, { 7, 8, 9, 10,
+		 * 11, 12 }, { 7, 8, 9, 10, 11, 12 },
+		 * 
+		 * };
+		 */
 
-		};
+		String[][] tableObject = new String[capturedPacket.size()][6];
 
-		return (Object[][]) objTest;
+		for (int i = 0; i < capturedPacket.size(); i++) {
+			// 0, 1, 2, 3, 4, 5, 6
+			// 위험도, 시간, 프로토콜, 출발지, 도착지, 이벤트
+
+			String tempPacket[] = { "1", "2", "3", "4", "5"
+					// capturedPacket.get(i).getPacketResource("protocol_name"),
+					// capturedPacket.get(i).getPacketResource("arrival_time"),
+					// capturedPacket.get(i).getPacketResource("protocol_name"),
+					// capturedPacket.get(i).getPacketResource("src_ip"),
+					// capturedPacket.get(i).getPacketResource("dst_ip"),
+					// capturedPacket.get(i).getPacketResource("protocol_name"),
+			};
+			tableObject[i] = tempPacket;
+		}
+
+		return (Object[][]) tableObject;
 	}
 
 	// TODO : 정적 변수 할당하는 곳
@@ -657,33 +662,36 @@ public class MainView extends javax.swing.JFrame {
 	static String selectedIp = "";
 
 	// Variables declaration - do not modify
-	private javax.swing.JLabel label_analysis;
-	private javax.swing.JLabel label_eventLog;
-	private javax.swing.JLabel label_info_duT;
-	private javax.swing.JLabel label_info_duT_edit;
-	private javax.swing.JLabel label_info_startT;
-	private javax.swing.JLabel label_info_startT_edit;
-	private javax.swing.JLabel label_info_type;
-	private javax.swing.JLabel label_info_type_edit;
-	private javax.swing.JLabel label_information;
-	private javax.swing.JLabel label_start_stop;
-	private javax.swing.JLabel label_traffic;
-	private javax.swing.JLabel logo_lebel;
-	private javax.swing.JPanel panel_analysis;
-	private javax.swing.JPanel panel_dashBoard;
-	private javax.swing.JPanel panel_graph;
-	private javax.swing.JPanel panel_information;
-	private javax.swing.JPanel panel_logo;
-	private javax.swing.JPanel panel_preferences;
-	private javax.swing.JPanel panel_start_stop;
-	private javax.swing.JPanel panel_traffic;
-	private javax.swing.JPanel panel_tree;
-	private javax.swing.JScrollPane scrollPane_eventLog;
-	private javax.swing.JScrollPane scrollPane_iptree;
-	private javax.swing.JTabbedPane tabbedPane_main;
-	private javax.swing.JTable table_eventLog;
-	private javax.swing.JLabel treeLabel;
-	private javax.swing.JTree tree_ip;
+	public javax.swing.JLabel label_analysis;
+	public javax.swing.JLabel label_eventLog;
+	public javax.swing.JLabel label_info_duT;
+	public javax.swing.JLabel label_info_duT_edit;
+	public javax.swing.JLabel label_info_startT;
+	public javax.swing.JLabel label_info_startT_edit;
+	public javax.swing.JLabel label_info_type;
+	public javax.swing.JLabel label_info_type_edit;
+	public javax.swing.JLabel label_information;
+	public javax.swing.JLabel label_start_stop;
+	public javax.swing.JLabel label_traffic;
+	public javax.swing.JLabel logo_lebel;
+	public javax.swing.JPanel panel_analysis;
+	public javax.swing.JPanel panel_dashBoard;
+	public javax.swing.JPanel panel_graph;
+	public javax.swing.JPanel panel_information;
+	public javax.swing.JPanel panel_logo;
+	public javax.swing.JPanel panel_preferences;
+	public javax.swing.JPanel panel_start_stop;
+	public javax.swing.JPanel panel_traffic;
+	public javax.swing.JPanel panel_tree;
+	public javax.swing.JScrollPane scrollPane_eventLog;
+	public javax.swing.JScrollPane scrollPane_iptree;
+	public javax.swing.JTabbedPane tabbedPane_main;
+	public javax.swing.JTable table_eventLog;
+	public javax.swing.JLabel treeLabel;
+	public javax.swing.JTree tree_ip;
+	public javax.swing.table.DefaultTableModel tableModel;
+	public DefaultMutableTreeNode rootNode;
+	public DefaultTreeModel treeModel;
 
 	// End of variables declaration
 }
