@@ -2,7 +2,7 @@
 //
 //  @ Project : JNU_IDS
 //  @ Date : 2016-05-11
-//  @ Author : Ã¤µÎ°É, ±è¹ÎÁø, ±è¿¬¼ö, Á¤Âù¿ì, ÃÖ¹ÎÁ¤
+//  @ Author : ì±„ë‘ê±¸, ê¹€ë¯¼ì§„, ê¹€ì—°ìˆ˜, ì •ì°¬ìš°, ìµœë¯¼ì •
 //
 //
 
@@ -11,20 +11,19 @@ package Controller;
 import View.MainView;
 
 /**
- * @author Á¤Âù¿ì
+ * @author ì •ì°¬ìš°
  * @version 1.0
  * @serial 2016.05.30
  */
 
 public class MainController {
-	
+
 	/**
-	 * @ MainController
-	 * @ added main method 
+	 * @ MainController @ added main method
 	 */
-	
+
 	private static boolean condition;
-	
+
 	public static boolean getCondition() {
 		return condition;
 	}
@@ -33,62 +32,66 @@ public class MainController {
 		MainController.condition = condition;
 	}
 
-
 	MainView mainView;
-	
-	
-		public PacketCaptureThread main_packetcaptureThread;
-	
-	public MainController(View.MainView mainView){
-		this.mainView = mainView; 
-		main_packetcaptureThread = new PacketCaptureThread(mainView);
-		
+
+	public PacketCaptureThread main_packetcaptureThread;
+
+	public MainController(View.MainView mainView) {
+		this.mainView = mainView;
+//		main_packetcaptureThread = new PacketCaptureThread(mainView);
+
 	}
-	
-	
+
 	/**
-	 * @author Á¤Âù¿ì
+	 * @author ì •ì°¬ìš°
 	 * @since 2016.05.30
-	 * @param contdition	½ÃÀÛ°ú Á¤Áö¸¦ ÄÁÆ®·ÑÇÒ ÇÃ·¡±×
+	 * @param contdition
+	 *            ì‹œì‘ê³¼ ì •ì§€ë¥¼ ì»¨íŠ¸ë¡¤í•  í”Œë˜ê·¸
 	 */
-	public void main(boolean contdition){
-		if(contdition)
+	public void main(boolean contdition) {
+		if (contdition)
 			startCapture();
 		else
 			stopCapture();
 	}
 
 	/**
-	 * Start Packet Capture
-	 * Set condition value is true
-	 * @return	Value Of String
+	 * Start Packet Capture Set condition value is true
+	 * 
+	 * @return Value Of String
 	 */
 	public String startCapture() {
 
 		condition = true;
 
-//		È¯°æ¼³Á¤ ·ê¼Â ¼¼ÆÃÇÏ±â
-				
-		new DevicesSelector(main_packetcaptureThread);//µğ¹ÙÀÌ½º ¼±ÅÃ		
-	
+		// í™˜ê²½ì„¤ì • ë£°ì…‹ ì„¸íŒ…í•˜ê¸°
+
+		main_packetcaptureThread = new PacketCaptureThread(mainView);
+		new DevicesSelector(main_packetcaptureThread);// ë””ë°”ì´ìŠ¤ ì„ íƒ
+
 		String value = "";
 		return value;
 	}
 
-	
 	/**
-	 * Stop Packet Capture
-	 * Set condition value is false
-	 * @return	Value Of String
+	 * Stop Packet Capture Set condition value is false
+	 * 
+	 * @return Value Of String
 	 */
 	public String stopCapture() {
 
 		condition = false;
-		
+
 		main_packetcaptureThread.stopCapture();
+		// main_packetcaptureThread.stop();
 //		main_packetcaptureThread.stop();
-		
+		main_packetcaptureThread.interrupt();
 		String value = "";
 		return value;
+	}
+	
+	public PacketCaptureThread get_main() {
+
+		return main_packetcaptureThread;
 	}
 }

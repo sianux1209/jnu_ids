@@ -2,7 +2,7 @@
 //
 //  @ Project : JNU_IDS
 //  @ Date : 2016-05-11
-//  @ Author : Ã¤µÎ°É, ±è¹ÎÁø, ±è¿¬¼ö, Á¤Âù¿ì, ÃÖ¹ÎÁ¤
+//  @ Author : ì±„ë‘ê±¸, ê¹€ë¯¼ì§„, ê¹€ì—°ìˆ˜, ì •ì°¬ìš°, ìµœë¯¼ì •
 //
 //
 
@@ -11,15 +11,29 @@ package View;
 
 import java.awt.*;
 import javax.swing.*;
-
+/**
+ * 
+ * @author ì±„ë‘ê±¸
+ * @since 2016.06.18
+ * @version 3.0
+ *
+ */
 public class AnalysesView {
 	private JFrame jFrame;
 	private Container container;
-
+	/**
+	 * AnalysesView ìƒì„±ì
+	 */
 	public void setFrame() {
 
 	}
-
+	/**
+	 * getImageResource
+	 * @param imageIndex
+	 * 					input String
+	 * @return
+	 * 					return ImageIcon
+	 */
 	public ImageIcon getImageResource(String imageIndex) {
 
 		ImageIcon image = new ImageIcon(imageIndex);

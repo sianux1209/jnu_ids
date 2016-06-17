@@ -2,7 +2,7 @@
 //
 //  @ Project : JNU_IDS
 //  @ Date : 2016-05-11
-//  @ Author : Ã¤µÎ°É, ±è¹ÎÁø, ±è¿¬¼ö, Á¤Âù¿ì, ÃÖ¹ÎÁ¤
+//  @ Author : ì±„ë‘ê±¸, ê¹€ë¯¼ì§„, ê¹€ì—°ìˆ˜, ì •ì°¬ìš°, ìµœë¯¼ì •
 //
 //
 
@@ -12,14 +12,16 @@ package Controller;
 public class RulesetController extends FileController {
 	private String ruleset;
 
-	//ÇÁ·Î±×·¥¿¡ ¾µ ·ê¼Â ¼³Á¤
+	//í”„ë¡œê·¸ë¨ì— ì“¸ ë£°ì…‹ ì„¤ì •
 	public void setRuleset() {
 		
 		
 	}
 
-	//ÇöÀç ·ê¼Â »óÅÂ ¹İÈ¯
+	//í˜„ì¬ ë£°ì…‹ ìƒíƒœ ë°˜í™˜
 	public String getNowRuleset() {
+		
+		ruleset = "ip";
 		
 		return ruleset;
 

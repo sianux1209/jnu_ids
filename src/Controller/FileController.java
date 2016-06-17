@@ -2,7 +2,7 @@
 //
 //  @ Project : JNU_IDS
 //  @ Date : 2016-05-11
-//  @ Author : Ã¤µÎ°É, ±è¹ÎÁø, ±è¿¬¼ö, Á¤Âù¿ì, ÃÖ¹ÎÁ¤
+//  @ Author : ì±„ë‘ê±¸, ê¹€ë¯¼ì§„, ê¹€ì—°ìˆ˜, ì •ì°¬ìš°, ìµœë¯¼ì •
 //
 //
 
@@ -16,35 +16,35 @@ public class FileController {
 	private File logFile;
 	private File preferencesFile;
 
-	//·ê¼ÂÆÄÀÏ ¼³Á¤
+	//ë£°ì…‹íŒŒì¼ ì„¤ì •
 	public void setRulesetFile() {
 
 	}
 
-	//·ê¼ÂÆÄÀÏ ºÒ·¯¿À±â
+	//ë£°ì…‹íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
 	public File getRulesetFile() {
 
 		return rulesetFile;
 
 	}
 
-	//·Î±×ÆÄÀÏ ¼­œ¤·
+	//ë¡œê·¸íŒŒì¼ ì„œë ‚ã…‡
 	public void setLogFile() {
 
 	}
 
-	//·Î±×ÆÄÀÏ ºÒ·¯¿À±â
+	//ë¡œê·¸íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
 	public File getLogFile() {
 
 		return logFile;
 	}
 
-	//È¯°æ¼³Á¤ ¼³Á¤
+	//í™˜ê²½ì„¤ì • ì„¤ì •
 	public void setPreferencesFile() {
 
 	}
 
-	//È¯°æ¼³Á¤ ºÒ·¯¿À±â
+	//í™˜ê²½ì„¤ì • ë¶ˆëŸ¬ì˜¤ê¸°
 	public File getPreferencesFile() {
 
 		return preferencesFile;

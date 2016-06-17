@@ -2,12 +2,12 @@
 //
 //  @ Project : JNU_IDS
 //  @ Date : 2016-05-11
-//  @ Author : Ã¤µÎ°É, ±è¹ÎÁø, ±è¿¬¼ö, Á¤Âù¿ì, ÃÖ¹ÎÁ¤
+//  @ Author : ì±„ë‘ê±¸, ê¹€ë¯¼ì§„, ê¹€ì—°ìˆ˜, ì •ì°¬ìš°, ìµœë¯¼ì •
 //
 //
 package Resource;
 
-//ÀÌ¹ÌÁö¸íÀº Viewº°·Î ÇÔ¼ö ¾È¿¡ Áö¿ªº¯¼ö·Î ¿©±â¿¡ ÀÌ¸§ ³Ö¾î¼­ »ç¿ë
+//ì´ë¯¸ì§€ëª…ì€ Viewë³„ë¡œ í•¨ìˆ˜ ì•ˆì— ì§€ì—­ë³€ìˆ˜ë¡œ ì—¬ê¸°ì— ì´ë¦„ ë„£ì–´ì„œ ì‚¬ìš©
 public class ImageResource {
 	
 	//MainView imageResource start

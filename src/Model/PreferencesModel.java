@@ -2,14 +2,14 @@
 //
 //  @ Project : JNU_IDS
 //  @ Date : 2016-05-11
-//  @ Author : Ã¤µÎ°É, ±è¹ÎÁø, ±è¿¬¼ö, Á¤Âù¿ì, ÃÖ¹ÎÁ¤
+//  @ Author : ì±„ë‘ê±¸, ê¹€ë¯¼ì§„, ê¹€ì—°ìˆ˜, ì •ì°¬ìš°, ìµœë¯¼ì •
 //
 //
 
 package Model;
 
 
-//È¯°á¼³Á¤ ¸ğµ¨
+//í™˜ê²°ì„¤ì • ëª¨ë¸
 class PreferencesModel {
 	private View.PreferencesView preferenceView;
 	private Controller.PreferencesController preferencesController;

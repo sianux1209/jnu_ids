@@ -2,14 +2,14 @@
 //
 //  @ Project : JNU_IDS
 //  @ Date : 2016-05-11
-//  @ Author : Ã¤µÎ°É, ±è¹ÎÁø, ±è¿¬¼ö, Á¤Âù¿ì, ÃÖ¹ÎÁ¤
+//  @ Author : ì±„ë‘ê±¸, ê¹€ë¯¼ì§„, ê¹€ì—°ìˆ˜, ì •ì°¬ìš°, ìµœë¯¼ì •
 //
 //
 
 
 package Resource;
 
-//ÆÄÀÏ¸íÀº ÀüºÎ ¿©±â¼­ »ç¿ë
+//íŒŒì¼ëª…ì€ ì „ë¶€ ì—¬ê¸°ì„œ ì‚¬ìš©
 public class FileResource {
 	
 	public static String ruleSetFile = "ids_ruleset";

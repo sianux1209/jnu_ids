@@ -2,7 +2,7 @@
 //
 //  @ Project : JNU_IDS
 //  @ Date : 2016-05-11
-//  @ Author : Ã¤µÎ°É, ±è¹ÎÁø, ±è¿¬¼ö, Á¤Âù¿ì, ÃÖ¹ÎÁ¤
+//  @ Author : ì±„ë‘ê±¸, ê¹€ë¯¼ì§„, ê¹€ì—°ìˆ˜, ì •ì°¬ìš°, ìµœë¯¼ì •
 //
 //
 
@@ -15,9 +15,9 @@ public class PreferencesController {
 
 	public boolean confirmPassword() {
 
-		String userInput = ""; // ÀÔ·Â
+		String userInput = ""; // ì…ë ¥
 
-		// ¾ÏÈ£°¡ ¸ÂÀ¸¸é
+		// ì•”í˜¸ê°€ ë§ìœ¼ë©´
 		if (defaultPassword == userInput) {
 
 			return true;
@@ -27,12 +27,12 @@ public class PreferencesController {
 
 	}
 
-	// È¯°æ¼³Á¤ ÆÄÀÏ¿¡ ÀÔ·Â
+	// í™˜ê²½ì„¤ì • íŒŒì¼ì— ì…ë ¥
 	public void setPreferences() {
 
 	}
 
-	// È¯°æ¼³Á¤ ºÒ·¯¿À±â
+	// í™˜ê²½ì„¤ì • ë¶ˆëŸ¬ì˜¤ê¸°
 	public void getPreferences() {
 
 	}

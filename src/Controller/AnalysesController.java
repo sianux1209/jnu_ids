@@ -2,7 +2,7 @@
 //
 //  @ Project : JNU_IDS
 //  @ Date : 2016-05-11
-//  @ Author : Ã¤µÎ°É, ±è¹ÎÁø, ±è¿¬¼ö, Á¤Âù¿ì, ÃÖ¹ÎÁ¤
+//  @ Author : ì±„ë‘ê±¸, ê¹€ë¯¼ì§„, ê¹€ì—°ìˆ˜, ì •ì°¬ìš°, ìµœë¯¼ì •
 //
 //
 
@@ -21,14 +21,14 @@ public class AnalysesController extends MainController {
 
 	private String result;
 	
-	//ºĞ¼®
+	//ë¶„ì„
 	public String Analyses(File file) {
 		
 		
 		return result;
 	}
 	
-	//ºĞ¼®°á°ú ÀúÀå
+	//ë¶„ì„ê²°ê³¼ ì €ì¥
 	public void SaveResult(String fileName) {
 		
 		File file = new File(fileName);

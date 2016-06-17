@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * 
- * @author Á¤Âù¿ì
+ * @author ì •ì°¬ìš°
  * @version 1.0
  * @since 2016.05.30
  */
@@ -40,19 +40,18 @@ public class Packet_Table {
 		reString = new String();
 		packet = new HashMap<String, String>();
 		
-		packet.put("packet_type", "");
+		
 		packet.put("src_ip", "");
 		packet.put("src_mac", "");
 		packet.put("dst_ip", "");
 		packet.put("dst_mac", "");
 		packet.put("arrival_time", "");
-		packet.put("protocol_number", "");
 		packet.put("protocol_name", "");
 		packet.put("src_port", "");
 		packet.put("dst_port", "");
-		packet.put("event_number", "");
-		packet.put("event_name", "");
-		packet.put("risk", "0");
+		packet.put("data", "");
+		packet.put("event", "");
+		packet.put("risk", "information");
 		
 		
 	}
