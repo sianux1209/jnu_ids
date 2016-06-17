@@ -13,6 +13,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import Packet.Packet_Table;
 import View.MainView;
 import jpcap.JpcapCaptor;
+import jpcap.NetworkInterface;
 import jpcap.packet.ARPPacket;
 import jpcap.packet.EthernetPacket;
 import jpcap.packet.ICMPPacket;
@@ -34,9 +35,11 @@ public class PacketCaptureThread extends Thread {
 	 */
 
 	int i = 0;
-	int x, nChoice;
+	int x, index;
+	NetworkInterface[] devices;
 	JpcapCaptor captor;
-	jpcap.NetworkInterface[] list;
+
+	
 	ArrayList<Packet_Table> Capturedpacket;
 	MainView mainView;
 	HashSet<String> nodeSet;
@@ -55,39 +58,39 @@ public class PacketCaptureThread extends Thread {
 	 * Thread Start
 	 */
 	public void run() {
-
+		
 		Capturedpacket = new ArrayList<Packet_Table>();
 
-		// 사용가능한 디바이스 장치 리스트 검색
-		list = JpcapCaptor.getDeviceList();
-		System.out.println("Available interfaces: ");
-
-		for (x = 0; x < list.length; x++) {
-			System.out.println(x + " -> " + list[x].description);
-		}
-
 		System.out.println("-------------------------\n");
-		// nChoice = Integer.parseInt(getInput("Choose interface (0,1..): "));
-		nChoice = 1;
-		// 장치 선택 후 입력 받음
-		System.out.println("Listening on interface -> " + list[nChoice].description);
+		System.out.println("Listening on interface -> " + devices[index].description);
 		System.out.println("-------------------------\n");
 
-		/* Setup device listener */
 		try {
 			// JpcapCaptor.openDevice(네트워크 인터페이스, 한번에 캡처가능한 byte 수, true면
 			// promisc모드, processPacket()의 Timeout)
 			// openDevice 메소드를 통해 패킷 캡쳐를 활성화 시키고, loopPackt으로 패킷이 캡쳐되었을때 어떠한 행동을
 			// 할지 지정이 가능
 
-			captor = JpcapCaptor.openDevice(list[nChoice], 65535, false, 20);
-			// listen for TCP/IP only
+			captor = JpcapCaptor.openDevice(devices[index], 65535, false, 20);
+//			captor.setFilter("룰셋포트로드", true);
+		   
+/*			
+		    String filter = "";
+		    filter = "";
+	          for (int i = 0; i < list.length - 1; i++)
+	            filter = filter + list[i] + " and ";
+	          filter += list[i];
+	        }
+		    captor.setFilter(filter, true);
+*/		    
 			captor.setFilter("", true);
+			
+
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 
-		while (true) {
+		while (MainController.getCondition()) {
 
 			Packet info = captor.getPacket();
 
@@ -129,7 +132,17 @@ public class PacketCaptureThread extends Thread {
 			}
 		}
 	}
-	
+
+//디바이스 설정값 가져옴	
+	void setDevice(int index, NetworkInterface[] devices){
+		this.index = index;
+		this.devices = devices;
+	}
+//	
+	void stopCapture(){
+		captor.breakLoop();
+	}
+//	
 	private void setTreeNode() {
 		
 		mainView.rootNode.removeAllChildren();

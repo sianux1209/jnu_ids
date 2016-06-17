@@ -23,11 +23,21 @@ public class MainController {
 	 * @ added main method 
 	 */
 	
-	private boolean condition;
+	private static boolean condition;
+	
+	public static boolean getCondition() {
+		return condition;
+	}
+
+	public static void setCondition(boolean condition) {
+		MainController.condition = condition;
+	}
+
+
 	MainView mainView;
 	
 	
-	public PacketCaptureThread main_packetcaptureThread;
+		public PacketCaptureThread main_packetcaptureThread;
 	
 	public MainController(View.MainView mainView){
 		this.mainView = mainView; 
@@ -56,9 +66,11 @@ public class MainController {
 	public String startCapture() {
 
 		condition = true;
-		
-		main_packetcaptureThread.start();
-		
+
+//		환경설정 룰셋 세팅하기
+				
+		new DevicesSelector(main_packetcaptureThread);//디바이스 선택		
+	
 		String value = "";
 		return value;
 	}
@@ -73,7 +85,8 @@ public class MainController {
 
 		condition = false;
 		
-		main_packetcaptureThread.stop();
+		main_packetcaptureThread.stopCapture();
+//		main_packetcaptureThread.stop();
 		
 		String value = "";
 		return value;

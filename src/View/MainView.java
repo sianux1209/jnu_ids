@@ -241,7 +241,7 @@ public class MainView extends javax.swing.JFrame {
 					label_start_stop.setIcon(new javax.swing.ImageIcon(Resource.ImageResource.mainView_stop)); // NOI18N
 					tabbedPane_main.setSelectedIndex(0);
 
-					JOptionPane.showMessageDialog(null, "시작", "Title", JOptionPane.INFORMATION_MESSAGE, null);
+					//JOptionPane.showMessageDialog(null, "시작", "Title", JOptionPane.INFORMATION_MESSAGE, null);
 
 				}
 
