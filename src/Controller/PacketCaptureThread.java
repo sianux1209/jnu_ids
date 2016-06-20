@@ -58,6 +58,7 @@ public class PacketCaptureThread extends Thread {
 	int x, index;
 	// NetworkInterface[] devices;
 	// JpcapCaptor captor;
+	RulesetController ruleset;
 
 	Pcap pcap;
 	StringBuilder errbuf;
@@ -72,8 +73,9 @@ public class PacketCaptureThread extends Thread {
 	 * 
 	 * @param mainView
 	 */
-	public PacketCaptureThread(MainView mainView) {
+	public PacketCaptureThread(MainView mainView, RulesetController main_rulesetController) {
 		this.mainView = mainView;
+		ruleset = main_rulesetController;
 		nodeSet = new HashSet<>();
 	}
 	
@@ -91,7 +93,10 @@ public class PacketCaptureThread extends Thread {
 	public void run() {
 
 		//////// here
-
+		String startTime = new SimpleDateFormat("yy. M. d. a hh:mm:ss").format(new Date()).toString();
+		setStartTime(startTime);
+		ruleset.setStartTime(startTime);
+		
 		JPacketHandler<String> jpacketHandler = new JPacketHandler<String>() {
 			@Override
 			/**
@@ -116,7 +121,7 @@ public class PacketCaptureThread extends Thread {
 				// System.out.println(packet.toString());
 
 				// FRAME 모든 패킷에 포함됨
-				SimpleDateFormat dt1 = new SimpleDateFormat("HH:MM:SS");
+				SimpleDateFormat dt1 = new SimpleDateFormat("HH:mm:ss");
 				Date date = new Date(packet.getCaptureHeader().timestampInMillis());
 				packet_table.setPacket("arrival_time", dt1.format(date));
 
@@ -132,8 +137,11 @@ public class PacketCaptureThread extends Thread {
 					geteth_info(packet, packet_table); // smac, dmac
 
 					packet_table.setPacket("protocol_name", "HTTP");
+					ruleset.getEvent(packet, packet_table);
 					
-					find_url(packet_table, "naver");
+//					packet_table.setPacket("risk", ruleset.getRisk(packet, packet_table));
+
+//					find_url(packet_table, "naver");
 				}
 
 				// TCP
@@ -148,8 +156,9 @@ public class PacketCaptureThread extends Thread {
 					geteth_info(packet, packet_table); // smac, dmac
 
 					packet_table.setPacket("protocol_name", "TCP");
-					
-					find_port(packet_table, "443");
+
+					ruleset.getEvent(packet, packet_table);
+//					find_port(packet_table, "443");
 				}
 
 				// UDP
@@ -162,8 +171,9 @@ public class PacketCaptureThread extends Thread {
 					geteth_info(packet, packet_table); // smac, dmac
 
 					packet_table.setPacket("protocol_name", "UDP");
-					
-					find_port(packet_table, "443");
+
+					ruleset.getEvent(packet, packet_table);
+//					find_port(packet_table, "443");
 				}
 
 				// ICMP
@@ -177,8 +187,9 @@ public class PacketCaptureThread extends Thread {
 					geteth_info(packet, packet_table); // smac, dmac
 					
 					packet_table.setPacket("protocol_name", "ICMP");
-					
-					find_ip(packet_table, "168.");
+
+					ruleset.getEvent(packet, packet_table);
+				//	find_ip(packet_table, "168.131.42.68");
 				}
 
 				// ARP
@@ -191,6 +202,7 @@ public class PacketCaptureThread extends Thread {
 					geteth_info(packet, packet_table); // smac, dmac
 
 					packet_table.setPacket("protocol_name", "ARP");
+					ruleset.getEvent(packet, packet_table);
 				}
 				/*
 				 * System.out.println(); System.out.println("arrival_time : " +
@@ -230,6 +242,9 @@ public class PacketCaptureThread extends Thread {
 
 				nodeSet.add(packet_table.getPacketResource("src_ip"));
 				setTreeNode();
+				
+				
+				
 			}
 
 		};
@@ -277,6 +292,12 @@ public class PacketCaptureThread extends Thread {
 		pcap.close();
 	}
 
+	private void setStartTime(String startTime){
+		
+		mainView.setInformation(startTime, "00:00:00" , "information");
+		mainView.panel_information.revalidate();
+		mainView.panel_information.repaint();
+	}
 	/**
 	 * setTreeNode
 	 */
@@ -438,7 +459,7 @@ public class PacketCaptureThread extends Thread {
 
 			pk_table.setPacket("dst_port", Integer.toString(pack.getHeader(tcp).destination()));
 
-			// pk_table.setPacket("protocol_name","TCP");
+			 pk_table.setPacket("protocol_name","TCP");
 		}
 	}
 

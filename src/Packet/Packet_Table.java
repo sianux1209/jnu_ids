@@ -51,7 +51,7 @@ public class Packet_Table {
 		packet.put("dst_port", "");
 		packet.put("data", "");
 		packet.put("event", "");
-		packet.put("risk", "information");
+		packet.put("risk", "");
 		
 		
 	}

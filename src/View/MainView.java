@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -42,6 +43,7 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
 import Packet.Packet_Table;
+import javafx.scene.chart.PieChart;
 
 /**
  *
@@ -147,6 +149,7 @@ public class MainView extends javax.swing.JFrame {
       table_eventLog = new javax.swing.JTable();
       panel_preferences = totalPanel;
 
+      
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
       setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
       setResizable(false);
@@ -274,7 +277,7 @@ public class MainView extends javax.swing.JFrame {
 
       label_info_duT.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
       label_info_duT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-      label_info_duT.setText("유지 시간 :");
+      label_info_duT.setText("변경 시간 :");
 
       label_info_type.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
       label_info_type.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -352,10 +355,19 @@ public class MainView extends javax.swing.JFrame {
       panel_analysis.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
       // TODO : drawChart() 호출부
-      JFreeChart chart_analysis = drawPieChart("ANALYSIS", createPieDataset(65, 20, 10, 5));
-      ChartPanel cp_analysis = new ChartPanel(chart_analysis);
-
-      javax.swing.GroupLayout panel_analysisLayout = new javax.swing.GroupLayout(panel_analysis);
+      chart_analysis = drawPieChart("ANALYSIS", createPieDataset(1, 1, 1));
+ /*
+      JFreeChart chart_analysis = drawPieChart("ANALYSIS", 
+    		  createPieDataset(
+    				  mainController.main_rulesetController.getInformation()/mainController.main_rulesetController.getCount()
+    				  ,mainController.main_rulesetController.getNotice()/mainController.main_rulesetController.getCount()
+    				  ,mainController.main_rulesetController.getWarning()/mainController.main_rulesetController.getCount()
+    				  ,mainController.main_rulesetController.getCritical()/mainController.main_rulesetController.getCount()));
+ */
+ //     ChartPanel cp_analysis = new ChartPanel(chart_analysis);
+      cp_analysis = new ChartPanel(chart_analysis);
+      
+      panel_analysisLayout = new javax.swing.GroupLayout(panel_analysis);
       panel_analysis.setLayout(panel_analysisLayout);
       panel_analysisLayout.setHorizontalGroup(panel_analysisLayout
             .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(cp_analysis,
@@ -411,7 +423,7 @@ public class MainView extends javax.swing.JFrame {
             return canEdit[columnIndex];
          }
       };
-
+      
       table_eventLog.setModel(tableModel);
 
       // jtable 중앙정렬
@@ -518,14 +530,13 @@ public class MainView extends javax.swing.JFrame {
 
    }// </editor-fold>
 
-   public PieDataset createPieDataset(double information, double warning, double notice, double critical) {
+   public PieDataset createPieDataset(double notice, double warning, double critical) {
       // TODO : Create Pie Dataset
       DefaultPieDataset dataset = new DefaultPieDataset();
 
       dataset.setValue("Critical", critical);
       dataset.setValue("Notice", notice);
       dataset.setValue("Warning", warning);
-      dataset.setValue("Information", information);
 
       return dataset;
    }
@@ -660,6 +671,8 @@ public class MainView extends javax.swing.JFrame {
       return (Object[][]) tableObject;
    }
 
+
+   
    // TODO : 정적 변수 할당하는 곳
    static boolean check_start_stop = false;
    static String selectedIp = "";
@@ -695,6 +708,9 @@ public class MainView extends javax.swing.JFrame {
    public javax.swing.table.DefaultTableModel tableModel;
    public DefaultMutableTreeNode rootNode;
    public DefaultTreeModel treeModel;
+   public ChartPanel cp_analysis;
+public JFreeChart chart_analysis;
+public GroupLayout panel_analysisLayout;
 
    // End of variables declaration
 }

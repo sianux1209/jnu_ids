@@ -8,6 +8,9 @@
 
 package Controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import View.MainView;
 
 /**
@@ -21,7 +24,7 @@ public class MainController {
 	/**
 	 * @ MainController @ added main method
 	 */
-
+/*
 	private static boolean condition;
 
 	public static boolean getCondition() {
@@ -31,10 +34,11 @@ public class MainController {
 	public static void setCondition(boolean condition) {
 		MainController.condition = condition;
 	}
-
+*/
 	MainView mainView;
 
 	public PacketCaptureThread main_packetcaptureThread;
+	public RulesetController main_rulesetController;
 
 	public MainController(View.MainView mainView) {
 		this.mainView = mainView;
@@ -49,8 +53,10 @@ public class MainController {
 	 *            시작과 정지를 컨트롤할 플래그
 	 */
 	public void main(boolean contdition) {
-		if (contdition)
+		if (contdition){
+
 			startCapture();
+		}
 		else
 			stopCapture();
 	}
@@ -62,11 +68,12 @@ public class MainController {
 	 */
 	public String startCapture() {
 
-		condition = true;
+//		condition = true;
 
 		// 환경설정 룰셋 세팅하기
-
-		main_packetcaptureThread = new PacketCaptureThread(mainView);
+		
+		main_rulesetController = new RulesetController(mainView);
+		main_packetcaptureThread = new PacketCaptureThread(mainView, main_rulesetController);
 		new DevicesSelector(main_packetcaptureThread);// 디바이스 선택
 
 		String value = "";
@@ -80,7 +87,7 @@ public class MainController {
 	 */
 	public String stopCapture() {
 
-		condition = false;
+//		condition = false;
 
 		main_packetcaptureThread.stopCapture();
 		// main_packetcaptureThread.stop();
