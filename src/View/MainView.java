@@ -47,7 +47,7 @@ import javafx.scene.chart.PieChart;
 
 /**
  *
- * @author Sue
+ * @author 채두걸, 정찬우, 김연수
  */
 public class MainView extends javax.swing.JFrame {
 

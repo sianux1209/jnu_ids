@@ -39,11 +39,8 @@ import jpcap.packet.TCPPacket;
 import jpcap.packet.UDPPacket;
 
 /**
- * @author 정찬우
- * @version 1.0
- * @since 2016.05.30
  * 
- * @author 정찬우
+ * @author 정찬우, 채두걸, 김연수
  * @version 3.0
  * @since 2016.06.17
  */

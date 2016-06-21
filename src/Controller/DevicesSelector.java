@@ -16,6 +16,12 @@ import org.jnetpcap.PcapIf;
 import jpcap.JpcapCaptor;
 import jpcap.NetworkInterface;
 
+
+/**
+ * DevicesSelector
+ * @author ê¹€ì—°ìˆ˜
+ * 
+ */
 class DevicesSelector extends JFrame implements ActionListener {
 
 	PacketCaptureThread devices_pct;
@@ -62,7 +68,7 @@ class DevicesSelector extends JFrame implements ActionListener {
 //			dnames[i] = devices[i].description;
 			dnames[i] = alldevs.get(i).getDescription();
 
-		setTitle("µð¹ÙÀÌ½º ¼±ÅÃ");
+		setTitle("ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		
 		Container c = getContentPane();
 		c.setLayout(new FlowLayout());
@@ -98,9 +104,9 @@ class DevicesSelector extends JFrame implements ActionListener {
 			int index = dlist.getSelectedIndex();
 //			devices_pct.setDevice(dlist.getSelectedIndex(), devices);
 			PcapIf device = alldevs.get(index);
-			int snaplen = 64 * 1024;           // Capture all packets, no trucation ÇÑ¹ø¿¡ Ä¸Ã³°¡´ÉÇÑ byte ¼ö 
-		    int flags = Pcap.MODE_PROMISCUOUS; // capture all packets, NIC°¡ promiscuous mode·Î µ¿ÀÛÇÒ Áö ¿©ºÎ
-		    int timeout = 10 * 1000;           // 10 seconds in millis, millisecond ´ÜÀ§ÀÇ read timeout
+			int snaplen = 64 * 1024;           // Capture all packets, no trucation ï¿½Ñ¹ï¿½ï¿½ï¿½ Ä¸Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ byte ï¿½ï¿½ 
+		    int flags = Pcap.MODE_PROMISCUOUS; // capture all packets, NICï¿½ï¿½ promiscuous modeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		    int timeout = 10 * 1000;           // 10 seconds in millis, millisecond ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ read timeout
 		    Pcap pcap = Pcap.openLive(device.getName(), snaplen, flags, timeout, errbuf);  
 		    if (pcap == null) {  
 		      System.err.printf("Error while opening device for capture: %s\n",   

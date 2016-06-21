@@ -2,17 +2,20 @@
 //
 //  @ Project : JNU_IDS
 //  @ Date : 2016-05-11
-//  @ Author : 채두걸, 김민진, 김연수, 정찬우, 최민정
+//  @ Author : 채두걸
 //
 //
-
 
 package Controller;
 
 import java.io.File;
-
 import View.MainView;
 
+/**
+ * AnalysisController
+ * @author 채두걸
+ * 
+ */
 public class AnalysesController extends MainController {
 	public AnalysesController(MainView mainView) {
 		super(mainView);
