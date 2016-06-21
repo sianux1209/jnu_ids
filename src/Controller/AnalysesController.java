@@ -6,16 +6,13 @@
 //
 //
 
+
 package Controller;
 
 import java.io.File;
+
 import View.MainView;
 
-/**
- * AnalysisController
- * @author 채두걸
- * 
- */
 public class AnalysesController extends MainController {
 	public AnalysesController(MainView mainView) {
 		super(mainView);

@@ -39,8 +39,11 @@ import jpcap.packet.TCPPacket;
 import jpcap.packet.UDPPacket;
 
 /**
+ * @author 정찬우
+ * @version 1.0
+ * @since 2016.05.30
  * 
- * @author 정찬우, 채두걸, 김연수
+ * @author 정찬우
  * @version 3.0
  * @since 2016.06.17
  */
@@ -274,7 +277,7 @@ public class PacketCaptureThread extends Thread {
 	
 	/**
 	 * setDevice Pcap
-	 * @param tmp
+	 * @param tmp DevicesSelector에서 설정한 장치로 pcap 정보를 세팅함
 	 */
 	void setDevice(Pcap tmp) {
 		this.pcap = tmp;
@@ -289,6 +292,10 @@ public class PacketCaptureThread extends Thread {
 		pcap.close();
 	}
 
+	/**
+	 * mainView의 information 패널에 표시할 시작시간
+	 * @param startTime 
+	 */
 	private void setStartTime(String startTime){
 		
 		mainView.setInformation(startTime, "00:00:00" , "information");

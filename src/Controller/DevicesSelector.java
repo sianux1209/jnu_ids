@@ -16,19 +16,16 @@ import org.jnetpcap.PcapIf;
 import jpcap.JpcapCaptor;
 import jpcap.NetworkInterface;
 
-
 /**
- * DevicesSelector
+ * 패킷 캡쳐를 시작하기전에 네트워크 장치를 선택하는 역할
  * @author 김연수
- * 
+ * @version 3.0
  */
 class DevicesSelector extends JFrame implements ActionListener {
 
 	PacketCaptureThread devices_pct;
 	int x;
 	
-//	int index;
-	//JpcapCaptor cap;
 	NetworkInterface[] devices;
 	String[] dnames;
 	
@@ -38,7 +35,11 @@ class DevicesSelector extends JFrame implements ActionListener {
 	JList dlist;
 	JButton ok;
 	JButton cancel;	
-
+	
+	/**
+	 * 네트워크 장치 선택 화면 생성자
+	 * @param main_packetcaptureThread main_packetcaptureThread의 메소드를 호출하기 위함
+	 */
 	DevicesSelector(PacketCaptureThread main_packetcaptureThread) {
 		
 		
@@ -68,7 +69,7 @@ class DevicesSelector extends JFrame implements ActionListener {
 //			dnames[i] = devices[i].description;
 			dnames[i] = alldevs.get(i).getDescription();
 
-		setTitle("����̽� ����");
+		setTitle("장치 선택");
 		
 		Container c = getContentPane();
 		c.setLayout(new FlowLayout());
@@ -94,7 +95,9 @@ class DevicesSelector extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 
-
+	/**
+	 * 선택한 장치의 index를 가지고 패킷캡쳐를 위한 Jnetpcap의 장치연결
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 		
@@ -104,9 +107,9 @@ class DevicesSelector extends JFrame implements ActionListener {
 			int index = dlist.getSelectedIndex();
 //			devices_pct.setDevice(dlist.getSelectedIndex(), devices);
 			PcapIf device = alldevs.get(index);
-			int snaplen = 64 * 1024;           // Capture all packets, no trucation �ѹ��� ĸó������ byte �� 
-		    int flags = Pcap.MODE_PROMISCUOUS; // capture all packets, NIC�� promiscuous mode�� ������ �� ����
-		    int timeout = 10 * 1000;           // 10 seconds in millis, millisecond ������ read timeout
+			int snaplen = 64 * 1024;           
+		    int flags = Pcap.MODE_PROMISCUOUS; 
+		    int timeout = 10 * 1000;           
 		    Pcap pcap = Pcap.openLive(device.getName(), snaplen, flags, timeout, errbuf);  
 		    if (pcap == null) {  
 		      System.err.printf("Error while opening device for capture: %s\n",   

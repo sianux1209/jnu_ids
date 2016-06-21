@@ -1,10 +1,3 @@
-//
-//
-//  @ Project : JNU_IDS
-//  @ Date : 2016-05-11
-//  @ Author : 채두걸
-//
-//
 
 
 package Controller;

@@ -1,10 +1,4 @@
-//
-//
-//  @ Project : JNU_IDS
-//  @ Date : 2016-06-11
-//  @ Author : 채두걸, 정찬우
-//
-//
+
 
 package Controller;
 
@@ -68,10 +62,6 @@ public class MainController {
 	 */
 	public String startCapture() {
 
-//		condition = true;
-
-		// 환경설정 룰셋 세팅하기
-		
 		main_rulesetController = new RulesetController(mainView);
 		main_packetcaptureThread = new PacketCaptureThread(mainView, main_rulesetController);
 		new DevicesSelector(main_packetcaptureThread);// 디바이스 선택
@@ -86,12 +76,8 @@ public class MainController {
 	 * @return Value Of String
 	 */
 	public String stopCapture() {
-
-//		condition = false;
-
+		
 		main_packetcaptureThread.stopCapture();
-		// main_packetcaptureThread.stop();
-//		main_packetcaptureThread.stop();
 		main_packetcaptureThread.interrupt();
 		String value = "";
 		return value;
